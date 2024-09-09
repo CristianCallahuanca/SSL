@@ -15,6 +15,32 @@ typedef enum {
 } TipoToken;
 
 
+// Definición de los estados
+typedef enum {
+    ESTADO_INICIAL,
+    ESTADO_ID,
+    ESTADO_CONSTANTE,
+    ESTADO_OPERADOR,
+    ESTADO_PUNTUACION,
+    ESTADO_ASIGNACION_INICIO,
+    ESTADO_ASIGNACION_FINAL,
+    ESTADO_ERROR_GENERAL,
+    ESTADO_EOF
+} Estado;
+
+// Definición de las columnas para la tabla de transición
+typedef enum {
+    COL_LETRA,
+    COL_DIGITO,
+    COL_OPERADOR,
+    COL_PUNTUACION,
+    COL_ESPACIO,
+    COL_DOSPUNTOS,
+    COL_IGUAL,
+    COL_OTRO,
+    COL_EOF
+} Columna;
+
 typedef struct {
     TipoToken tipo;
     char lexema[1024];

@@ -1,32 +1,7 @@
 #include "scanner.h"
 #include <string.h>
-#include <ctype.h>
 
-// Definición de los estados
-typedef enum {
-    ESTADO_INICIAL,
-    ESTADO_ID,
-    ESTADO_CONSTANTE,
-    ESTADO_OPERADOR,
-    ESTADO_PUNTUACION,
-    ESTADO_ASIGNACION_INICIO,
-    ESTADO_ASIGNACION_FINAL,
-    ESTADO_ERROR_GENERAL,
-    ESTADO_EOF
-} Estado;
 
-// Definición de las columnas para la tabla de transición
-typedef enum {
-    COL_LETRA,
-    COL_DIGITO,
-    COL_OPERADOR,
-    COL_PUNTUACION,
-    COL_ESPACIO,
-    COL_DOSPUNTOS,
-    COL_IGUAL,
-    COL_OTRO,
-    COL_EOF
-} Columna;
 
 // Tabla de transición
 static Estado tablaTransicion[8][9] = {
@@ -41,17 +16,16 @@ static Estado tablaTransicion[8][9] = {
     { ESTADO_ERROR_GENERAL, ESTADO_ERROR_GENERAL, ESTADO_ERROR_GENERAL, ESTADO_ERROR_GENERAL, ESTADO_ERROR_GENERAL, ESTADO_ERROR_GENERAL, ESTADO_ERROR_GENERAL, ESTADO_ERROR_GENERAL, ESTADO_INICIAL }  // ESTADO_ERROR_GENERAL
 };
 
-// Funciones auxiliares para la clasificación de caracteres
 int esLetra(char c) {
-    return isalpha(c);
+    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
 }
 
 int esDigito(char c) {
-    return isdigit(c);
+    return c >= '0' && c <= '9';
 }
 
 int esEspacio(char c) {
-    return isspace(c);
+    return c == ' ' || c == '\n' || c == '\t' || c == '\r';
 }
 
 int esOperador(char c) {
