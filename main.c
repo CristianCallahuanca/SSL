@@ -17,4 +17,4 @@ int main() {
             token.lexema);
     } while (token.tipo != TOKEN_EOF);
     return 0;
-}
+} 
